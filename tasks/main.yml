@@ -1,0 +1,27 @@
+---
+
+- name: Install phpldapadmin
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - apache2
+    - php5
+    - php5-cli
+    - php5-common
+    - php5-curl
+    - php5-gmp
+    - php5-mcrypt
+    - php5-ldap
+    - libapache2-mod-php5
+    - php-pear
+    - wget
+    - curl
+    - phpldapadmin
+
+- name: Create config
+  action: template src={{ item }}  dest=/etc/phpldapadmin/{{ item }}
+  with_items:
+    - config.php 
+  tags:
+    - phpldapadmin 
+    - config
+
